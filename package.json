@@ -7,7 +7,8 @@
   "contributors": [
     "Joe Ibershoff <joe@realtymaps.com>",
     "Moti Zilberman <motiz88@gmail.com>",
-    "Gabe Martin <gabema@gmail.com>"
+    "Gabe Martin <gabema@gmail.com>",
+    "Tobias Kunicke <tobias@kunicke.eu>"
   ],
   "files": [
     "dist",
@@ -15,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/realtymaps/promise-ftp"
+    "url": "https://github.com/tkausl/promise-ftp"
   },
   "keywords": [
     "ftp",
@@ -36,7 +37,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/realtymaps/promise-ftp/issues"
+    "url": "https://github.com/tkausl/promise-ftp/issues"
   },
   "engines": {
     "node": ">=0.11.13",
