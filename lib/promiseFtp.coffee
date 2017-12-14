@@ -6,6 +6,7 @@
 FtpClient = require('ftp')
 Promise = require('bluebird')
 path = require('path')
+fs = require('fs')
 
 FtpConnectionError = require('promise-ftp-common').FtpConnectionError
 FtpReconnectError = require('promise-ftp-common').FtpReconnectError
@@ -185,6 +186,10 @@ class PromiseFtp
         intendedCwd = path.join(intendedCwd, '..')
         result
 
+    @putFile = (src, dst) ->
+      createReadStream(src)
+      .then (rs) ->
+        promisifiedClientMethods.put(rs, dst)
     
     # common promise, connection-check, and reconnect logic
     commonLogicFactory = (name, handler) ->
@@ -231,3 +236,22 @@ class PromiseFtp
 
 
 module.exports = PromiseFtp
+
+
+createReadStream = (filename) ->
+  new Promise (resolve, reject) ->
+    onError = (err) ->
+      reject err
+
+    onReadable = () ->
+      cleanup
+      resolve stream
+
+    cleanup = () ->
+      stream.removeListener 'readable', onReadable
+      stream.removeListener 'error', onError
+
+    stream = fs.createReadStream filename
+    stream.on 'error', onError
+    stream.on 'readable', () ->
+      resolve stream
